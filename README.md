@@ -1,2 +1,2 @@
 # Data-Structure-Assignments
-Assignments focusing on implementing data structures
+Assignments focusing on implementing data structures using c++
