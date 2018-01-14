@@ -1,0 +1,62 @@
+#Name: Bailey Payne  ID: brp7vh  Lab: Tuesdays 9:30am
+
+CXX=clang++ $(CXXFLAGS)
+CXXFLAGS=-Wall -O2
+DEBUG=-Wall -g
+OFILES= pizza.o pizzadough.o tomatosauce.o toppings.o \
+    mushrooms.o peppers.o cheese.o pepperoni.o
+
+.SUFFIXES: .o .cpp
+
+pizza: $(OFILES)
+	$(CXX) $(DEBUG) $(OFILES) -o pizza
+	clang++ $? -o $@
+	@echo "Pizza is Hot and Ready!"
+	
+pizza.o: pizza.cpp
+	$(CXX) $(CXXFLAGS) -c pizza.cpp
+	clang++ -c $@.cpp -o $@
+
+pizzadough.o: pizzadough.cpp pizzadough.h
+	$(CXX) $(CXXFLAGS) -c pizzadough.cpp
+	clang++ -c $@.cpp -o $@
+	
+tomatosauce.o: tomatosauce.cpp tomatosauce.h
+	$(CXX) $(CXXFLAGS) -c tomatosauce.cpp
+	clang++ -c $@.cpp -o $@
+	
+toppings.o: pepperoni.cpp peppers.cpp mushrooms.cpp cheese.cpp toppings.cpp \
+			pepperoni.h peppers.h mushrooms.h cheese.h toppings.h
+	$(CXX) $(CXXFLAGS) -c toppings.cpp
+	clang++ -c $@.cpp -o $@
+	
+pepperoni.o: pepperoni.cpp pepperoni.h
+	$(CXX) $(CXXFLAGS) -c pepperoni.cpp
+	clang++ -c $@.cpp -o $@
+	
+mushrooms.o: mushrooms.cpp mushrooms.h
+	$(CXX) $(CXXFLAGS) -c mushrooms.cpp
+	clang++ -c $@.cpp -o $@
+	
+peppers.o: peppers.cpp peppers.h
+	$(CXX) $(CXXFLAGS) -c peppers.cpp
+	clang++ -c $@.cpp -o $@
+
+cheese.o: cheese.cpp cheese.h
+	$(CXX) $(CXXFLAGS) -c cheese.cpp
+	clang++ -c $@.cpp -o $@
+	
+clean:
+	-rm -f *.o *~ pizza
+
+#Dependencies:
+cheese.o: cheese.cpp cheese.h
+mushrooms.o: mushrooms.cpp mushrooms.h
+pepperoni.o: pepperoni.cpp pepperoni.h
+peppers.o: peppers.cpp peppers.h
+pizza.o: pizza.cpp pizzadough.h tomatosauce.h toppings.h cheese.h \
+  mushrooms.h peppers.h pepperoni.h
+pizzadough.o: pizzadough.cpp pizzadough.h
+tomatosauce.o: tomatosauce.cpp tomatosauce.h
+toppings.o: toppings.cpp toppings.h cheese.h mushrooms.h peppers.h \
+  pepperoni.h
